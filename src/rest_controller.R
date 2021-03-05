@@ -16,8 +16,19 @@
 
 source("runtime_functions.R")
 
+library(reticulate)
+py_run_file("runtime_functions.py", convert=FALSE)
+
+# Set an endpoint to return a (random) python function result
+#* @get /python
+get_python <- function(){
+  #return("hello world")
+  py_eval("hello_world()")
+}
+
 # Set an endpoint to return a pet name
 #* @get /names
 get_names <- function(){
   generate_many_names(20, model, character_lookup, max_length)
 }
+
